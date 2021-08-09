@@ -13,7 +13,7 @@ function sum (a, b) {
 //console.log(sum(3,4))
 
 /*
-2) RIVEDERE
+2)
 Create a function to check two given numbers and return true if one of the number is 50 or if their sum is 50.
 */
 
@@ -146,24 +146,23 @@ function testArrNumbs2(ns){
 
 /*
 11)
-Create a function to find the longest string from a given array of strings. DA RIVEDERE
+Create a function to find the longest string from a given array of strings. 
 */ 
 
-/*function longestStr(str1, str2){
-    if(str1.length > str2.length){
-        return str1
-    } else {return str2}
+const greetings = [
+  "hello",
+  "hi",
+  "Good Morning",
+  "Good Afternoon",
+  "Hey",
+  "Heeeellooooooo",
+];
+
+function findLongestStr(arr) {
+  const longestStr = arr.reduce((a, b) => (a.length > b.length ? a : b));
+  return longestStr;
 }
 
-console.log(longestStr("casaaaaa", "casona"))
-*/
-function longest_string(str_ara) {
-  let max = str_ara[0].length;
-  str_ara.map(v => max = Math.max(max, v.length));
-  result = str_ara.filter(v => v.length == max);
-  return result;
-}
-//console.log()
 
 /*
 12)
@@ -187,7 +186,7 @@ function angle_Type(angle) {
   }
   return "Straight angle.";
 }
-//console.log()
+//console.log(angle_Type(45))
 
 //13)
 //Create a function to find the index of the greatest element of a given array of integers
@@ -219,9 +218,9 @@ function largNum(arr) {
         }
     }
   }
-console.log(largNum([73, 40, 2, 60]))
+//console.log(largNum([73, 40, 2, 60]))
 
-//16) RIVEDERE
+//16) 
 //Create a function to check from two given integers, whether one is positive and another one is negative.
 
 function checkPositiveNegative(a, b){
@@ -237,20 +236,16 @@ function checkPositiveNegative(a, b){
 //console.log(checkPositiveNegative(4, -3))
 
 
-//17) (NOT COMPLETE)
+//17
 //Create a function to create new string with first 3 characters are in lower case and the others
 //in upper case. If the string length is less than 3 convert all the characters in upper case. 
 
 function newString(str){
-  if (str.length <= 3) {
-  return str.toUpperCase();
+    let a=str.substr(0,3);
+    let b=str.substr(3,str.length);
+    return a.toLowerCase() + b.toUpperCase();
 }
-  front_part = (str.substring(0, 3)).toLowerCase();
-  back_part = str.substring(3, str.length);  
-  return front_part + back_part;
-}
-//console.log(newString("ASDASDASD"))
-
+//console.log(newString(("Strive")));
 
 //18)
 //Create a function to calculate the sum of the two given integers, If the sum is in the range 50..80 return 65 other wise return 80.
@@ -280,15 +275,40 @@ this would be a "DiegoRiccardo".
 34 has four factors: 1, 2, 17, and 34.
 this would be "34".
 */
-
+function convNumToStr(a){
+    let result=""
+    if(a%3===0){
+        result+="Diego"
+    }
+    if(a%5===0){
+        result+="Riccardo"
+    }
+    if(a%7===0){
+        result+="Stefano"
+    }
+    if((a%3!==0)&&(a%5!==0)&&(a%7!==0)){
+        result=a
+    }
+    return result
+}
+//console.log(convNumToStr(14));
 //20)
 //Create a function that given a phrase returns its acronym, like British Broadcasting Corporation returns BBC
 
-function acronymn(str) {
+/*function acronymn(str) {
     return str.split( /\b(?=[a-z])/ig ) // split on word boundaries --> This is a regular expression, selects the first letter of a word if it is lowercase
-      .map( token => token[0] )         // get first letter of each token
+      .map( token => token[0] )         // get first letter of each token (map -> creates a new array populated with the results of calling a provided function on every element in the calling array.)
       .join( '' )
       .toUpperCase()                    // convert to Uppercase string
     ;
+}*/
+
+function toAcronym(string) {
+  const newStr = string.split(" ");
+  const letters = [];
+  for (let str of newStr) {
+    letters.push(str.slice(0, 1));
+  }
+  return letters.join("").toUpperCase();
 }
-//console.log(acronymn("british broadcasting corporation"))
+//console.log(toAcronym("british broadcasting corporation"))
