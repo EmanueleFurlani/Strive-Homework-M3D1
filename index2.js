@@ -12,7 +12,7 @@ const getMax = function (str) {
   });
   return maxChar;
 };
-console.log(getMax("assseessee"))
+//console.log(getMax("assseessee"))
 
 /* 2) ANAGRAMS
 Check to see if two provided strings are anagrams of each other.
@@ -25,14 +25,47 @@ or punctuation.  Consider capital letters to be the same as lower case
   anagrams('RAIL! SAFETY!', 'fairy tales') --> True
   anagrams('Hi there', 'Bye there') --> False
 */
+/*
+function anagram(str1, str2) {  // one version
+  const string1 = str1
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .toLowerCase()
+    .split("")
+    .sort();
+
+  const string2 = str2
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .toLowerCase()
+    .split("")
+    .sort();
+  if (string1.join("") === string2.join("")) {
+    return true;
+  } else {
+    return false;
+  }
+} */
+// console.log(anagram("RAIL! SAFETY!", "fairy tales"));
+
+const isAnagram = (str1, str2) =>
+  str1.split("").sort().join("") === str2.split("").sort().join("");
+  console.log(isAnagram("rail safety", "fairy tales"))
 
 /* 3) ANAGRAMS 2
 Given a word and a list of possible anagrams, select the correct sublist.
-
 --- Examples 
-
     "listen" and a list of candidates like "enlists" "google" "inlets" "banana" the program should return a list containing "inlets".
 */
+
+const anagrams2 = (str, arr) => {
+  const anagrams = [];
+  arr.forEach((word) => {
+    if (isAnagram(str, word)) {
+      anagrams.push(word);
+    }
+  });
+  return anagrams;
+};
+console.log(anagrams2("listen", ["enlists", "google", "inlets", "banana"]))
 
 /* 4) PALINDROME
 Given a string, return true if the string is a palindrome
@@ -54,7 +87,7 @@ function palindrome(str) {
     }
 }
 
-console.log(palindrome("assa"))
+//console.log(palindrome("assa"))
 
 /* 5) REVERSE INT
 Given an integer, return an integer that is the reverse
@@ -63,7 +96,7 @@ ordering of numbers.
 
 function reversedNum(n){
     const reversed = n.toString().split("").reverse().join(""); 
-    return parseInt(reversed)                        
+    return Math.sign(n) * parseInt(reversed)                        
 }
 //console.log(reversedNum(43))
 
@@ -88,6 +121,29 @@ step has spaces on the right hand side!
         '##  '
         '### '
         '####' */
+
+/*function steps(n, i = 1) {   // 1st version
+  if (i > n) return;
+  console.log("#".repeat(i) + " ".repeat(n - i));
+  steps(n, i + 1);
+}
+console.log(steps(6))*/
+
+const steps = (n) => {
+  for (let i = 0; i < n; i++) {
+    let step = " ";
+
+    for (let j = 0; j < n; j++) {
+      if (j <= i) {
+        step += "#";
+      } else {
+        step += " ";
+      }
+    }
+    console.log(step);
+  }
+};
+steps(4)
 
 /* 7) REVERSE STRING
 
@@ -120,6 +176,28 @@ where each subarray is of length size
     chunk([1, 2, 3, 4, 5], 10) --> [[ 1, 2, 3, 4, 5]]
 */
 
+/* function chunk(array, size) { 1° version with while
+  const chunks = [];
+  let i = 0;
+  while (i < array.length) {
+    chunks.push(array.slice(i, i+=size))
+  }
+  return chunks;
+}
+console.log(chunk([1, 2, 3, 4, 5], 2)) */
+
+function sliceIntoChunks(arr, chunkSize) { //version with for loop
+    const res = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+        const chunk = arr.slice(i, i + chunkSize);
+        res.push(chunk);
+    }
+    return res;
+}
+
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+//console.log(sliceIntoChunks(arr, 3));
+
 /* 9) PYRAMID
 
 Write a function that accepts a positive number N.
@@ -139,7 +217,7 @@ pyramid has spaces on both the left and right hand sides
         ' ### '
         '#####' */
 
-/* 10) SPYRAL MATRIX
+/* 10) SPYRAL MATRIX found online, check it in second time
 
 Write a function that accepts an integer N
 and returns a NxN spiral matrix.
@@ -203,4 +281,4 @@ function matrix(n) {
   return results;
 }
 
-console.log(matrix(4))
+//console.log(matrix(4))
